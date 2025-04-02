@@ -19,7 +19,7 @@ if (
 // Middlewares
 app.use(
    cors({
-      origin: "http://localhost:3000", // Solo permitir solicitudes desde este origen
+      origin: "*", // Solo permitir solicitudes desde este origen
       methods: ["POST", "OPTIONS"], // Permitir los métodos POST y OPTIONS
       allowedHeaders: ["Content-Type", "Authorization"], // Permitir estos encabezados
    })
@@ -57,7 +57,8 @@ app.post("/send-email", async (req, res) => {
 
       const mailOptions = {
          from: process.env.EMAIL_USER,
-         to: process.env.RECIPIENT_EMAIL,
+         to: email,
+         cc: process.env.RECIPIENT_EMAIL,
          subject: "Gracias por contactar con Joan Company | FalconFPV",
          html: `
          <html>
