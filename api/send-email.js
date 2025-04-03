@@ -48,62 +48,78 @@ export default async (req, res) => {
          cc: process.env.RECIPIENT_EMAIL,
          subject: "Gracias por contactar con Joan Company | FalconFPV",
          html: `
-        <html>
-          <head>
-            <style>
-              body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f9;
-                color: #333;
-                padding: 20px;
-              }
-              .container {
-                max-width: 600px;
-                margin: 0 auto;
-                background-color: #fafeff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-              }
-              h1 {
-                color: #f76008;
-              }
-              p {
-                font-size: 16px;
-                line-height: 1.6;
-                color: #0d0d0d;
-              }
-              .info {
-                background-color: #f9f9f9;
-                padding: 10px;
-                margin: 10px 0;
-                border-left: 5px solid #f76008;
-              }
-              .footer {
-                font-size: 12px;
-                color: #777;
-                text-align: center;
-                margin-top: 20px;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Gracias por tu mensaje, ${name}!</h1>
-              <p>He recibido tu mensaje y me pondré en contacto contigo lo antes posible.</p>
-              <div class="info">
-                <p><strong>Correo:</strong> ${email}</p>
-                <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
-                <p><strong>Mensaje:</strong></p>
-                <p>${message}</p>
-              </div>
-              <hr />
-              <div class="footer">
-                <p>Joan Company | Copyright © 2025</p>
-              </div>
-            </div>
-          </body>
-        </html>
+          <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Mensaje Recibido</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f9;
+                        color: #333;
+                        margin: 0;
+                        padding: 20px;
+                    }
+                    .container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        background-color: #fafeff;
+                        padding: 25px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                        text-align: left;
+                    }
+                    h1 {
+                        color: #f76008;
+                        font-size: 24px;
+                        margin-bottom: 15px;
+                    }
+                    p {
+                        font-size: 16px;
+                        line-height: 1.6;
+                        margin: 10px 0;
+                    }
+                    .info {
+                        background-color: #f9f9f9;
+                        padding: 15px;
+                        margin: 20px 0;
+                        border-left: 5px solid #f76008;
+                        border-radius: 5px;
+                    }
+                    .info p {
+                        margin: 5px 0;
+                    }
+                    hr {
+                        border: none;
+                        border-top: 1px solid #ddd;
+                        margin: 20px 0;
+                    }
+                    .footer {
+                        font-size: 12px;
+                        color: gray !important;
+                        text-align: center;
+                        margin-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>¡Gracias por tu mensaje, ${name}!</h1>
+                    <p>He recibido tu mensaje y me pondré en contacto contigo lo antes posible.</p>
+                    <div class="info">
+                        <p><strong>Correo:</strong> ${email}</p>
+                        <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
+                        <p><strong>Mensaje:</strong></p>
+                        <p>${message}</p>
+                    </div>
+                    <hr />
+                    <div class="footer">
+                        <p>Joan Company | Copyright © 2025</p>
+                    </div>
+                </div>
+            </body>
+            </html>
       `,
       };
 
