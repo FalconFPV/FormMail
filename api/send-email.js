@@ -1,44 +1,15 @@
 require("dotenv").config();
-const express = require("express");
 const nodemailer = require("nodemailer");
-const cors = require("cors");
 
-const app = express();
+module.exports = async (req, res) => {
+   if (req.method !== "POST") {
+      return res
+         .status(405)
+         .json({ success: false, message: "Método no permitido" });
+   }
 
-const PORT = process.env.PORT || 80;
-
-// Verificar si las variables de entorno están definidas
-if (
-   !process.env.EMAIL_USER ||
-   !process.env.EMAIL_PASS ||
-   !process.env.RECIPIENT_EMAIL
-) {
-   console.error("❌ ERROR: Faltan variables de entorno en el archivo .env");
-   process.exit(1);
-}
-
-// Middlewares
-app.use(
-   cors({
-      origin: "*", // Solo permitir solicitudes desde este origen
-      methods: ["POST", "OPTIONS"], // Permitir los métodos POST y OPTIONS
-      allowedHeaders: ["Content-Type", "Authorization"], // Permitir estos encabezados
-   })
-);
-
-app.use((req, res, next) => {
-   console.log("Solicitud recibida:", req.method, req.url); // Debugging para ver si llega la solicitud
-   next();
-});
-
-// Middleware para analizar JSON
-app.use(express.json());
-
-// Ruta para enviar correos
-app.post("/send-email", async (req, res) => {
    const { name, email, phone, message } = req.body;
 
-   // Validar que los campos obligatorios estén presentes
    if (!name || !email || !message) {
       return res.status(400).json({
          success: false,
@@ -123,7 +94,6 @@ app.post("/send-email", async (req, res) => {
          `,
       };
 
-      // Enviar el correo
       await transporter.sendMail(mailOptions);
 
       res.status(200).json({
@@ -137,18 +107,4 @@ app.post("/send-email", async (req, res) => {
          message: "Error al enviar el correo",
       });
    }
-});
-
-// Responder a solicitudes OPTIONS (Preflight)
-app.options("*", (req, res) => {
-   res.sendStatus(200); // Aceptar solicitudes OPTIONS sin problemas
-});
-
-app.get("/", (req, res) => {
-   res.send("Servidor funcionando 🚀");
-});
-
-// Iniciar servidor
-app.listen(PORT, () => {
-   console.log(`✅ Servidor corriendo en el puerto ${PORT}`);
-});
+};
