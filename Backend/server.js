@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 // Verificar si las variables de entorno están definidas
 if (
