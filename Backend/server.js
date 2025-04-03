@@ -63,7 +63,6 @@ app.post("/send-email", async (req, res) => {
          html: `
          <html>
             <head>
-               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
                <style>
                   body {
                      font-family: Arial, sans-serif;
