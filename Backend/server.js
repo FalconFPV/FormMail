@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 // Verificar si las variables de entorno están definidas
 if (
    !process.env.EMAIL_USER ||
@@ -142,7 +144,11 @@ app.options("*", (req, res) => {
    res.sendStatus(200); // Aceptar solicitudes OPTIONS sin problemas
 });
 
+app.get("/", (req, res) => {
+   res.send("Servidor funcionando 🚀");
+});
+
 // Iniciar servidor
-app.listen(() => {
-   console.log("✅ Servidor iniciado");
+app.listen(PORT, () => {
+   console.log(`✅ Servidor corriendo en el puerto ${PORT}`);
 });
