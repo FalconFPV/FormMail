@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 
@@ -109,7 +110,9 @@ export default async (req, res) => {
                     <p>He recibido tu mensaje y me pondré en contacto contigo lo antes posible.</p>
                     <div class="info">
                         <p><strong>Correo:</strong> ${email}</p>
-                        <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
+                        <p><strong>Teléfono:</strong> ${
+                           phone || "No proporcionado"
+                        }</p>
                         <p><strong>Mensaje:</strong></p>
                         <p>${message}</p>
                     </div>
@@ -121,6 +124,13 @@ export default async (req, res) => {
             </body>
             </html>
       `,
+         attachments: [
+            {
+               filename: "InfoServicios - Joan Company.pdf", // Nombre del archivo en el correo
+               path: path.join(__dirname, "public", "services.pdf"), // Ruta al archivo PDF
+               contentType: "application/pdf",
+            },
+         ],
       };
 
       await transporter.sendMail(mailOptions);
