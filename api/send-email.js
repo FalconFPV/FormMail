@@ -102,12 +102,29 @@ export default async (req, res) => {
                         text-align: center;
                         margin-top: 20px;
                     }
+                    .pdf-notice {
+                        background-color: #f0f8ff;
+                        padding: 15px;
+                        margin: 20px 0;
+                        border-left: 5px solid #f76008;
+                        border-radius: 5px;
+                    }
+                    
+                    .pdf-notice p {
+                        margin: 5px 0;
+                        color: #333;
+                    }
                 </style>
             </head>
             <body>
                 <div class="container">
                     <h1>¡Gracias por tu mensaje, ${name}!</h1>
                     <p>He recibido tu mensaje y me pondré en contacto contigo lo antes posible.</p>
+                    <div class="pdf-notice">
+                        <p><strong>Información importante:</strong></p>
+                        <p>He adjuntado a este correo un documento PDF con toda la información detallada sobre mis servicios, precios y condiciones.</p>
+                        <p>Te recomiendo revisarlo y no dudes en responderme este correo si tienes alguna duda adicional.</p>
+                    </div>
                     <div class="info">
                         <p><strong>Correo:</strong> ${email}</p>
                         <p><strong>Teléfono:</strong> ${
