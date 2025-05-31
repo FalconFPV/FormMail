@@ -8,7 +8,7 @@ export default async (req, res) => {
    // Configuración de CORS (permitir solicitudes desde localhost:3000)
    res.setHeader(
       "Access-Control-Allow-Origin",
-      "https://falconfpv.github.io"
+      "https://www.joancompany.es"
    );
    res.setHeader("Access-Control-Allow-Methods", "POST");
    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
