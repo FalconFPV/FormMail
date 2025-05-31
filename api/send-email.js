@@ -35,13 +35,15 @@ export default async (req, res) => {
    }
 
    try {
-      const transporter = nodemailer.createTransport({
-         service: "gmail",
-         auth: {
+        const transporter = nodemailer.createTransport({
+        host: "smtp.dondominio.com",
+        port: 465, // Usa 587 si no quieres SSL
+        secure: true, // true para 465 (SSL), false para 587 (STARTTLS)
+        auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
-         },
-      });
+        },
+    });
 
       const mailOptions = {
          from: process.env.EMAIL_USER,
