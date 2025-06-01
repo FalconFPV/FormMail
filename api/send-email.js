@@ -44,7 +44,7 @@ export default async (req, res) => {
             pass: process.env.EMAIL_PASS,
         },
     });
-
+        // Datos del correo electrónico
       const mailOptions = {
          from: process.env.EMAIL_USER,
          to: email,
