@@ -24,7 +24,7 @@ export default async (req, res) => {
          .json({ success: false, message: "Método no permitido" });
    }
 
-   const { name, email, phone, message } = req.body;
+   const { name, email, phone, message, recaptchaToken } = req.body;
 
    if (!name || !email || !message) {
       return res.status(400).json({
@@ -33,6 +33,31 @@ export default async (req, res) => {
             "Faltan datos obligatorios. Asegúrese de que 'Nombre', 'Correo electrónico' y 'Mensaje' estén completos.",
       });
    }
+    
+   if (!recaptchaToken) {
+      return res.status(400).json({
+         success: false,
+         message: "Fallo de verificación: No se proporcionó reCAPTCHA.",
+      });
+   }
+
+   const secretKey = process.env.RECAPTCHA_SECRET;
+
+   const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+
+   const captchaRes = await fetch(verificationURL, {
+      method: "POST",
+   });
+
+   const captchaData = await captchaRes.json();
+
+   if (!captchaData.success) {
+      return res.status(403).json({
+         success: false,
+         message: "Fallo de verificación reCAPTCHA.",
+      });
+   }
+ 
 
    try {
         const transporter = nodemailer.createTransport({
