@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
    const API_KEY = process.env.GOOGLE_API_KEY;
    const PLACE_ID = process.env.PLACE_ID;
 
@@ -13,6 +13,8 @@ module.exports = async function handler(req, res) {
    try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log("Google Places API response:", data);
+
       const reviews = data.result?.reviews || [];
       res.status(200).json(reviews);
    } catch (error) {
@@ -21,4 +23,4 @@ module.exports = async function handler(req, res) {
          detail: error.message,
       });
    }
-};
+}
