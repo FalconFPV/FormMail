@@ -8,7 +8,7 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ error: "Faltan claves de API o Place ID" });
    }
 
-   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=review,rating,user_ratings_total&key=${API_KEY}`;
+   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews,rating,user_ratings_total&key=${API_KEY}`;
 
    try {
       const response = await fetch(url);
