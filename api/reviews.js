@@ -13,7 +13,15 @@ export default async function handler(req, res) {
    try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log("Google Places API response:", data);
+
+      // Evitar cache para que el cliente reciba siempre datos frescos
+      res.setHeader(
+         "Cache-Control",
+         "no-store, no-cache, must-revalidate, proxy-revalidate"
+      );
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+      res.setHeader("Surrogate-Control", "no-store");
 
       const reviews = data.result?.reviews || [];
       res.status(200).json(reviews);
