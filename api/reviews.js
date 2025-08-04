@@ -1,6 +1,6 @@
-import fetch from "node-fetch";
+const fetch = require("node-fetch");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
    const API_KEY = process.env.GOOGLE_API_KEY;
    const PLACE_ID = process.env.PLACE_ID;
 
@@ -21,4 +21,4 @@ export default async function handler(req, res) {
          detail: error.message,
       });
    }
-}
+};
